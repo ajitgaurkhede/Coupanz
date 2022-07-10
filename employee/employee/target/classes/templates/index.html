@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>[[${pageTitle}]]</title>
+<!-- CSS only -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<div class="text-center">
+
+		<h3>
+			<a th:href="@{/home}" class="link-primary">Product Manager</a>
+		</h3>
+
+	</div>
+
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-2">
+				<a th:href="@{/new/product}" class="link-primary">[[${pageTitle}]]</a>
+			</div>
+
+		</div>
+
+
+		<div>
+			<form th:action="@{/search/product}" method="get"
+				style="padding: 10px">
+				<input type="text" name="keyword" th:value="${keyword}"
+					placeholder="Find by Product Name" size="50">
+				<button type="submit" class="btn btn-info">Search</button>
+			</form>
+
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">Product Id</th>
+						<th scope="col">Product Name</th>
+						<th scope="col">Brand</th>
+						<th scope="col">Made In</th>
+						<th scope="col">Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					<th:block th:each="product : ${productLst}">
+						<tr>
+
+							<td>[[${product.productId}]]</td>
+							<td>[[${product.productName}]]</td>
+							<td>[[${product.brand}]]</td>
+							<td>[[${product.madeBy}]]</td>
+							<td>[[${product.price}]]</td>
+							<td><a class="h8 mr-3"
+								th:href="@{'/edit/product/' + ${product.productId}}">Edit</a> <a
+								class="h8 mr-3"
+								th:href="@{'/delete/product/' + ${product.productId}}">Delete</a>
+							</td>
+						</tr>
+					</th:block>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</body>
+</html>
